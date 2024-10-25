@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo com Várias Variáveis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculo do Estribo</h1>
+        
+        <label for="largura">Insira a largura (X):</label>
+        <input type="number" id="largura" placeholder="Digite a largura (A)" oninput="calcular()">
+        
+        <label for="comprimento">Insira o comprimento (Y):</label>
+        <input type="number" id="comprimento" placeholder="Digite o comprimento (B)" oninput="calcular()">
+
+        <label for="valorFloat">Valor do Ferro:</label>
+        <input type="number" step="0.01" id="valorFloat" placeholder="Digite o valor float" oninput="calcular()">
+
+        <label for="valorUsuario">Espaçamento do estribo:</label>
+        <input type="number" step="0.01" id="valorUsuario" placeholder="Digite um valor" oninput="calcular()">
+        
+        <p id="resultado"></p>
+        <p id="resultadoFinal"></p>
+        <p id="resultadoDivisao"></p>
+        <p id="resultadoMultiplicadoDivisao"></p>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
