@@ -5,7 +5,7 @@ function calcular() {
     var valorUsuario = document.getElementById("valorUsuario").value;
     
     if (largura === "" || comprimento === "") {
-        document.getElementById("resultado").textContent = "Por favor, insira valores para A e B.";
+        document.getElementById("resultado").textContent = "Por favor, insira valores para X e Y.";
         return;
     }
 
