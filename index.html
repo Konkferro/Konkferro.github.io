@@ -1,33 +1,43 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cálculo Ferro</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Página do Filme</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #ffffff;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+        iframe {
+            width: 80%;
+            height: 500px;
+            border: none;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 2rem;
+        }
+        p {
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Calculo do Estribo</h1>
-        
-        <label for="largura">Insira a largura (X):</label>
-        <input type="number" id="largura" placeholder="Digite a largura (X)" oninput="calcular()">
-        
-        <label for="comprimento">Insira o comprimento (Y):</label>
-        <input type="number" id="comprimento" placeholder="Digite o comprimento (Y)" oninput="calcular()">
-
-        <label for="valorFloat">Valor do Ferro:</label>
-        <input type="number" step="0.01" id="valorFloat" placeholder="Digite o valor float" oninput="calcular()">
-
-        <label for="valorUsuario">Espaçamento do estribo:</label>
-        <input type="number" step="0.01" id="valorUsuario" placeholder="Digite um valor" oninput="calcular()">
-        
-        <p id="resultado"></p>
-        <p id="resultadoFinal"></p>
-        <p id="resultadoDivisao"></p>
-        <p id="resultadoMultiplicadoDivisao"></p>
+        <h1>Assista ao Filme</h1>
+        <p>Aproveite seu filme diretamente da nossa página.</p>
+        <iframe src="https://drive.google.com/file/d/1Ccbm50P6C8kcOKdERLxoOGHBJ6GqydTx/preview" allowfullscreen></iframe>
     </div>
-    
-    <script src="script.js"></script>
 </body>
 </html>
