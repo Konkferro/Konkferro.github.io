@@ -24,7 +24,7 @@ function calcular() {
     // Se o valor float(Valor do ferro) for inserido, calcular a multiplicação e divisão
     if (valorFloat !== "") {
         var float = parseFloat(valorFloat);
-        var resultadoMultiplicado = (resultadoFinal * float) / 100;
+        var resultadoMultiplicado = (resultadoFinal * float) / 100.toFixed(2);
 
         document.getElementById("resultadoFinal").textContent = "Valor de 1 estribo: R$" + resultadoMultiplicado.toFixed(3);
     } else {
