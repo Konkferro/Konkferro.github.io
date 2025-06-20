@@ -1,33 +1,47 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cálculo Ferro</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Venda de Ferro Trabalhado</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Calculo do Estribo</h1>
+  <button onclick="mostrarCalculadora()">🏛️ Viga</button>
 
-        <label for="largura">Insira a largura (X):</label>
-        <input type="number" id="largura" placeholder="Digite a largura (X)" oninput="calcular()">
+  <div id="calculadora" style="display: none;">
+    <h2>Viga</h2>
 
-        <label for="comprimento">Insira o comprimento (Y):</label>
-        <input type="number" id="comprimento" placeholder="Digite o comprimento (Y)" oninput="calcular()">
+    <div id="vergalhaoContainer" class="container"></div>
 
-        <label for="valorFloat">Valor do Ferro:</label>
-        <input type="number" step="0.01" id="valorFloat" placeholder="Digite o valor float" oninput="calcular()">
-
-        <label for="valorUsuario">Espaçamento do estribo:</label>
-        <input type="number" step="0.01" id="valorUsuario" placeholder="Digite um valor" oninput="calcular()">
-
-        <p id="resultado"></p>
-        <p id="resultadoFinal"></p>
-        <p id="resultadoDivisao"></p>
-        <p id="resultadoMultiplicadoDivisao"></p>
+    <div class="linha">
+      <label>Dimensão do Estribo:</label>
+      <div class="dimensoes">
+        <input type="number" id="Dimensão1" />
+        <span class="x">X</span>
+        <input type="number" id="Dimensão2" />
+      </div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="linha">
+      <label>Estribo:</label>
+      <select id="bitolaEstribo"></select>
+
+      <label>A cada:</label>
+      <input type="number" id="QTDestribo" />
+    </div>
+
+    <div class="linha">
+      <label>Tamanho da Viga:</label>
+      <input type="number" id="metros" />
+    </div>
+
+    <div class="linha centralizar">
+      <button onclick="calcularFerro()">Calcular</button>
+    </div>
+
+    <p id="resultado"></p>
+  </div>
 </body>
 </html>
