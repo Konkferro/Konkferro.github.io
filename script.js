@@ -1,52 +1,106 @@
-function calcular() {
-    var largura = document.getElementById("largura").value;
-    var comprimento = document.getElementById("comprimento").value;
-    var valorFloat = document.getElementById("valorFloat").value;
-    var valorUsuario = document.getElementById("valorUsuario").value;
-    
-    if (largura === "" || comprimento === "") {
-        document.getElementById("resultado").textContent = "Por favor, insira valores para X e Y.";
-        return;
-    }
+const bitolas = {
+  "1/4": 2.68,
+  "5/16": 4.34,
+  "3/8": 6.46,
+  "1/2": 9.62,
+  "5/8": 15.78,
+  "4.2": 1.26,
+  "5.0": 1.80
+};
 
-    var A = parseFloat(largura);
-    var B = parseFloat(comprimento);
+let contadorVergalhoes = 0;
 
-    // Somando A(X) com ele mesmo, e B(Y) com ele mesmo
-    var resultadoA = A + A;
-    var resultadoB = B + B;
+function mostrarCalculadora() {
+  document.getElementById('calculadora').style.display = 'block';
+  carregarBitolaEstribo();
 
-    // Somando A + B + 12
-    var resultadoFinal = resultadoA + resultadoB + 12;
+  if (contadorVergalhoes === 0) {
+    adicionarVergalhao(); // Exibe a primeira linha por padrão
+  }
+}
 
-    document.getElementById("resultado").textContent = "CM Linear: " + resultadoFinal;
+function adicionarVergalhao() {
+  const container = document.getElementById('vergalhaoContainer');
+  const div = document.createElement('div');
+  div.className = "linha";
+  div.id = `vergalhaoLinha_${contadorVergalhoes}`;
 
-    // Se o valor float(Valor do ferro) for inserido, calcular a multiplicação e divisão
-    if (valorFloat !== "") {
-        var float = parseFloat(valorFloat);
-        var resultadoMultiplicado = (resultadoFinal * float) / 100;
+  const isPrimeiro = contadorVergalhoes === 0;
 
-        document.getElementById("resultadoFinal").textContent = "Valor de 1 estribo: R$" + resultadoMultiplicado.toFixed(3);
-    } else {
-        document.getElementById("resultadoFinal").textContent = "";
-    }
+ div.innerHTML = `
+  ${isPrimeiro ? `<button class="add-btn" onclick="adicionarVergalhao()">+</button>` : ``}
+  
+  <div class="grupo-entrada">
+    <label>Bitola:</label>
+    <select class="bitolaVergalhao" id="bitola_${contadorVergalhoes}"></select>
+  </div>
 
-    // Se o valor do usuário(espaçamento) for inserido, calcular 100 dividido por ele
-    if (valorUsuario !== "") {
-        var divisor = parseFloat(valorUsuario);
-        if (divisor !== 0) {
-            var resultadoDivisao = (100 / divisor).toFixed(2);
-            document.getElementById("resultadoDivisao").textContent = "Quantidade de estribo em 1Mt é : " + resultadoDivisao + " estribo";
-            
-            // Multiplicando o resultado final pelo resultado da divisão
-            var resultadoMultiplicadoDivisao = resultadoMultiplicado * resultadoDivisao;
-            document.getElementById("resultadoMultiplicadoDivisao").textContent = "Valor dos estribos em 1Mt: R$" + resultadoMultiplicadoDivisao.toFixed(2);
-        } else {
-            document.getElementById("resultadoDivisao").textContent = "Não é possível dividir por zero.";
-            document.getElementById("resultadoMultiplicadoDivisao").textContent = "";
-        }
-    } else {
-        document.getElementById("resultadoDivisao").textContent = "";
-        document.getElementById("resultadoMultiplicadoDivisao").textContent = "";
-    }
+  <div class="grupo-entrada">
+    <label>Qtd:</label>
+    <input type="number" class="quantidadeVergalhao" id="quantidade_${contadorVergalhoes}">
+  </div>
+
+  ${!isPrimeiro ? `<button class="remove-btn" onclick="removerLinha('${div.id}')">X</button>` : ``}
+`;
+
+  container.appendChild(div);
+  const select = document.getElementById(`bitola_${contadorVergalhoes}`);
+  preencherBitolaNoSelect(select);
+  contadorVergalhoes++;
+}
+
+function removerLinha(id) {
+  const linha = document.getElementById(id);
+  if (linha) linha.remove();
+}
+
+function preencherBitolaNoSelect(selectEl) {
+  selectEl.innerHTML = "";
+  for (const bitola in bitolas) {
+    const option = document.createElement('option');
+    option.value = bitola;
+    option.textContent = bitola;
+    selectEl.appendChild(option);
+  }
+}
+
+function carregarBitolaEstribo() {
+  const select = document.getElementById('bitolaEstribo');
+  if (select.options.length > 0) return;
+
+  for (const bitola in bitolas) {
+    const option = document.createElement('option');
+    option.value = bitola;
+    option.textContent = bitola;
+    select.appendChild(option);
+  }
+}
+
+function calcularFerro() {
+  const selects = document.querySelectorAll('.bitolaVergalhao');
+  const inputs = document.querySelectorAll('.quantidadeVergalhao');
+  let resultado1 = 0;
+
+  selects.forEach((select, index) => {
+    const bitola = select.value;
+    const quantidade = parseFloat(inputs[index].value) || 0;
+    const preco = bitolas[bitola] || 0;
+    resultado1 += preco * quantidade;
+  });
+
+  const Dim1 = parseFloat(document.getElementById('Dimensão1').value);
+  const Dim2 = parseFloat(document.getElementById('Dimensão2').value);
+  const qtdEstribo = parseFloat(document.getElementById('QTDestribo').value);
+  const metros = parseFloat(document.getElementById('metros').value);
+  const bitolaEstribo = document.getElementById('bitolaEstribo').value;
+  const precoEstribo = bitolas[bitolaEstribo] || 0;
+
+  const resultado2Bruto = ((((Dim1 * 2) + (Dim2 * 2)) / 100) * (100 / qtdEstribo)) * precoEstribo;
+  const resultado2 = parseFloat(resultado2Bruto.toFixed(2));
+  const resultadoFinal = (resultado1 + resultado2) * metros;
+
+  document.getElementById('resultado').innerText =
+    `Total Vergalhões: R$ ${resultado1.toFixed(2)}\n` +
+    `Estribo: R$ ${resultado2.toFixed(2)}\n` +
+    `Preço Final: R$ ${resultadoFinal.toFixed(2)}`;
 }
