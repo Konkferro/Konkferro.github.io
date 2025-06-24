@@ -4,6 +4,10 @@ body {
   color: #900;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
 }
 
 button {
@@ -21,7 +25,13 @@ button:hover {
   background-color: #b71c1c;
 }
 
-.add-btn, .remove-btn {
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.3);
+}
+
+.add-btn,
+.remove-btn {
   height: 36px;
   font-size: 18px;
   border-radius: 4px;
@@ -55,6 +65,19 @@ button:hover {
   box-shadow: 0 0 10px rgba(144, 0, 0, 0.2);
 }
 
+#botaoInicial {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.icone-viga {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
 h2 {
   margin-bottom: 20px;
   color: #b71c1c;
@@ -75,6 +98,11 @@ label {
   color: #900;
   margin-bottom: 5px;
   display: block;
+}
+
+.grupo-entrada {
+  display: flex;
+  flex-direction: column;
 }
 
 input,
@@ -124,4 +152,30 @@ select {
   font-size: 16px;
   text-align: left;
   margin-top: 20px;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 480px) {
+  .linha {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  input[type="number"],
+  select {
+    width: 100%;
+  }
+
+  .dimensoes input {
+    width: 100%;
+  }
+
+  .icone-viga {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+#btnVoltar {
+  display: none;
 }
