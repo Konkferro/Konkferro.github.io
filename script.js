@@ -1,21 +1,12 @@
-const bitolas = {
-  "1/4": 2.68,
-  "5/16": 4.34,
-  "3/8": 6.46,
-  "1/2": 9.62,
-  "5/8": 15.78,
-  "4.2": 1.26,
-  "5.0": 1.80
-};
-
 let contadorVergalhoes = 0;
 
 function mostrarCalculadora() {
+  document.getElementById('botaoInicial').style.display = 'none';
   document.getElementById('calculadora').style.display = 'block';
   carregarBitolaEstribo();
 
   if (contadorVergalhoes === 0) {
-    adicionarVergalhao(); // Exibe a primeira linha por padrão
+    adicionarVergalhao();
   }
 }
 
@@ -27,25 +18,27 @@ function adicionarVergalhao() {
 
   const isPrimeiro = contadorVergalhoes === 0;
 
- div.innerHTML = `
-  ${isPrimeiro ? `<button class="add-btn" onclick="adicionarVergalhao()">+</button>` : ``}
-  
-  <div class="grupo-entrada">
-    <label>Bitola:</label>
-    <select class="bitolaVergalhao" id="bitola_${contadorVergalhoes}"></select>
-  </div>
+  div.innerHTML = `
+    ${isPrimeiro ? `<button class="add-btn" onclick="adicionarVergalhao()">+</button>` : ``}
 
-  <div class="grupo-entrada">
-    <label>Qtd:</label>
-    <input type="number" class="quantidadeVergalhao" id="quantidade_${contadorVergalhoes}">
-  </div>
+    <div class="grupo-entrada">
+      <label>Bitola:</label>
+      <select class="bitolaVergalhao" id="bitola_${contadorVergalhoes}"></select>
+    </div>
 
-  ${!isPrimeiro ? `<button class="remove-btn" onclick="removerLinha('${div.id}')">X</button>` : ``}
-`;
+    <div class="grupo-entrada">
+      <label>Qtd:</label>
+      <input type="number" class="quantidadeVergalhao" id="quantidade_${contadorVergalhoes}">
+    </div>
+
+    ${!isPrimeiro ? `<button class="remove-btn" onclick="removerLinha('${div.id}')">X</button>` : ``}
+  `;
 
   container.appendChild(div);
+
   const select = document.getElementById(`bitola_${contadorVergalhoes}`);
   preencherBitolaNoSelect(select);
+
   contadorVergalhoes++;
 }
 
@@ -95,12 +88,28 @@ function calcularFerro() {
   const bitolaEstribo = document.getElementById('bitolaEstribo').value;
   const precoEstribo = bitolas[bitolaEstribo] || 0;
 
-  const resultado2Bruto = ((((Dim1 * 2) + (Dim2 * 2)) / 100) * (100 / qtdEstribo)) * precoEstribo;
+  const resultado2Bruto = ((((Dim1 * 2) + (Dim2 * 2)+10) / 100) * (100 / qtdEstribo)) * precoEstribo;
   const resultado2 = parseFloat(resultado2Bruto.toFixed(2));
   const resultadoFinal = (resultado1 + resultado2) * metros;
 
   document.getElementById('resultado').innerText =
-    `Total Vergalhões: R$ ${resultado1.toFixed(2)}\n` +
-    `Estribo: R$ ${resultado2.toFixed(2)}\n` +
-    `Preço Final: R$ ${resultadoFinal.toFixed(2)}`;
+   /* `Total Vergalhões: R$ ${resultado1.toFixed(2)}\n` +
+    `Estribo: R$ ${resultado2.toFixed(2)}\n` +*/
+    `Preço Final da viga: R$ ${resultadoFinal.toFixed(2)}`;
+}
+function voltarAoMenu() {
+  document.getElementById('calculadora').style.display = 'none';
+  document.getElementById('botaoInicial').style.display = 'flex';
+  document.getElementById('btnVoltar').style.display = 'none';
+}
+
+function mostrarCalculadora() {
+  document.getElementById('botaoInicial').style.display = 'none';
+  document.getElementById('calculadora').style.display = 'block';
+  document.getElementById('btnVoltar').style.display = 'inline-block';
+  carregarBitolaEstribo();
+
+  if (contadorVergalhoes === 0) {
+    adicionarVergalhao();
+  }
 }
