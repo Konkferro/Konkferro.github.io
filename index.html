@@ -12,12 +12,12 @@
 
   <div id="botaoInicial" class="centralizar">
     <button id="btnMostrar" onclick="mostrarCalculadora()">
-     <!--<img src="viga.png" alt="Ícone de Viga" class="icone-viga">-->  Viga
+      <img src="viga.png" alt="Ícone de Viga" class="icone-viga"> Viga
     </button>
   </div>
 
   <div id="calculadora" style="display: none;">
-    <h2>Viga</h2>
+    <h2>Calculadora de Ferro</h2>
 
     <div id="vergalhaoContainer" class="container"></div>
 
@@ -39,12 +39,16 @@
     </div>
 
     <div class="linha">
-      <label>Metragem da Viga:</label>
+      <label>Quantidade em metros da viga:</label>
       <input type="number" id="metros" />
     </div>
 
     <div class="linha centralizar">
       <button onclick="calcularFerro()">Calcular</button>
+    </div>
+
+    <div class="linha centralizar">
+      <button onclick="limparCampos()">🧹 Limpar Campos</button>
     </div>
 
     <p id="resultado"></p>
